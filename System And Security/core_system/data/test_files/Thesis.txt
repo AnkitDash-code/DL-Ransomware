@@ -1,0 +1,13 @@
+
+CHAPTER 1: INTRODUCTION
+
+This thesis explores the application of deep learning techniques for 
+real-time detection of zero-day ransomware attacks. Traditional signature-based
+antivirus solutions fail to detect novel malware variants, creating a critical
+security gap in modern computing environments.
+
+Our approach leverages behavioral analysis and 1D Convolutional Neural Networks
+to identify ransomware based on its operational patterns rather than static
+signatures, enabling detection of previously unseen ransomware families.
+
+Keywords: Ransomware, Deep Learning, Zero-Day Detection, Behavioral Analysis

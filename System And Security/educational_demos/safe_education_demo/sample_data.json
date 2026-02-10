@@ -1,0 +1,7 @@
+{
+    "project": "ransomware_analysis",
+    "version": "1.0",
+    "purpose": "educational_research",
+    "data_type": "simulation_samples",
+    "content": "This represents typical file structures for analysis"
+}

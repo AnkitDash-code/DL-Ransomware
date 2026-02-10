@@ -1,0 +1,18 @@
+{
+    "project": "ransomware_analysis",
+    "version": "1.0",
+    "purpose": "educational_research",
+    "data_type": "simulation_samples",
+    "content": "This represents typical file structures for analysis"
+}
+
+
+===============================================
+EDUCATIONAL SIMULATION NOTE
+===============================================
+This file represents what would happen in a real ransomware attack:
+- Original file would be encrypted with strong cryptography
+- Content would be completely unreadable without decryption key
+- Recovery would require the attacker's key or backups
+- This simulation shows the concept safely for educational purposes
+===============================================

@@ -1,0 +1,11 @@
+
+PROJECT NOTES - RANSOMWARE DETECTION SYSTEM
+
+TODO:
+[x] Implement 1D-CNN model architecture
+[x] Create behavioral monitoring system
+[x] Build Streamlit dashboard
+[ ] Conduct extensive testing
+[ ] Prepare presentation slides
+
+IMPORTANT: Remember to demonstrate zero-day detection capability!

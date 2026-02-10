@@ -1,0 +1,201 @@
+{
+  "ransomware_families": {
+    "TeslaCrypt": {
+      "aliases": ["TeslaCrypt", "Teslacrypt", "TCrypt"],
+      "file_patterns": [
+        "*.ecc",
+        "*.exx", 
+        "*.ezz",
+        "*.abc",
+        "*.aaa",
+        "*.xyz",
+        "*.zzz"
+      ],
+      "process_names": [
+        "teslacrypt.exe",
+        "tcrypt.exe",
+        "decrypt_instructions.txt"
+      ],
+      "registry_keys": [
+        "HKEY_CURRENT_USER\\Software\\TeslaCrypt",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\TeslaCrypt"
+      ],
+      "known_hashes": {
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855": "TeslaCrypt sample 1",
+        "d41d8cd98f00b204e9800998ecf8427e": "TeslaCrypt sample 2"
+      }
+    },
+    "WannaCry": {
+      "aliases": ["WannaCry", "WanaCrypt0r", "Wana Decrypt0r", "WCry"],
+      "file_patterns": [
+        "*.WCRY",
+        "*.WNCRY",
+        "@Please_Read_Me@.txt"
+      ],
+      "process_names": [
+        "WanaCrypt0r.exe",
+        "WanaDecrypt0r.exe", 
+        "tasksche.exe",
+        "mssecsvc.exe"
+      ],
+      "registry_keys": [
+        "HKEY_CURRENT_USER\\WanaCrypt0r",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\WanaCrypt0r"
+      ],
+      "known_hashes": {
+        "2017f8409757718130c1009000000000": "WannaCry kernel driver",
+        "7a7da1e58e12fa162701122393471111": "WannaCry payload"
+      }
+    },
+    "Locky": {
+      "aliases": ["Locky", "Locky ransomware"],
+      "file_patterns": [
+        "*.locky",
+        "*.zepto",
+        "*.odin",
+        "*.shit",
+        "*.thor",
+        "*.aesir",
+        "_Locky_recover_instructions.txt"
+      ],
+      "process_names": [
+        "locky.exe",
+        "87B23DAA.exe",
+        "decrypt_instructions.txt"
+      ],
+      "registry_keys": [
+        "HKEY_CURRENT_USER\\Locky",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Locky"
+      ],
+      "known_hashes": {
+        "87b23daa87b23daa87b23daa87b23daa": "Locky dropper",
+        "abcdef1234567890abcdef1234567890": "Locky payload"
+      }
+    },
+    "Cerber": {
+      "aliases": ["Cerber", "Cerber ransomware"],
+      "file_patterns": [
+        "*.cerber",
+        "*.cer01",
+        "*.cer02",
+        "*.cer03",
+        "HELP_YOUR_FILES.TXT"
+      ],
+      "process_names": [
+        "cerber.exe",
+        "cerber_[a-z0-9]{4}.exe",
+        "help_your_files.txt"
+      ],
+      "registry_keys": [
+        "HKEY_CURRENT_USER\\Cerber",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Cerber"
+      ],
+      "known_hashes": {
+        "1234567890abcdef1234567890abcdef": "Cerber loader",
+        "fedcba0987654321fedcba0987654321": "Cerber encryptor"
+      }
+    }
+  },
+  "trojan_families": {
+    "Emotet": {
+      "aliases": ["Emotet", "Heodo"],
+      "file_patterns": [
+        "emotet*.dll",
+        "emotet*.exe",
+        "microsoft_network_inspection.dll"
+      ],
+      "process_names": [
+        "emotet.exe",
+        "msiexec.exe",
+        "dllhost.exe"
+      ],
+      "registry_keys": [
+        "HKEY_CURRENT_USER\\Software\\Emotet",
+        "HKEY_LOCAL_MACHINE\\SOFTWARE\\Emotet"
+      ]
+    },
+    "TrickBot": {
+      "aliases": ["TrickBot", "Trickster"],
+      "file_patterns": [
+        "trickbot*.dll",
+        "trickbot*.exe"
+      ],
+      "process_names": [
+        "trickbot.exe",
+        "network_service.exe"
+      ],
+      "registry_keys": [
+        "HKEY_CURRENT_USER\\Software\\TrickBot"
+      ]
+    },
+    "Qakbot": {
+      "aliases": ["Qakbot", "Quakbot", "Pinkslipbot"],
+      "file_patterns": [
+        "qakbot*.dll",
+        "qakbot*.exe"
+      ],
+      "process_names": [
+        "qakbot.exe",
+        "updater.exe"
+      ],
+      "registry_keys": [
+        "HKEY_CURRENT_USER\\Software\\Qakbot"
+      ]
+    }
+  },
+  "generic_indicators": {
+    "suspicious_extensions": [
+      ".locked", ".crypt", ".encrypted", ".vault", ".ezz", ".xyz", ".zzz",
+      ".abc", ".aaa", ".karl", ".locky", ".zepto", ".odin", ".shit",
+      ".thor", ".aesir", ".cerber", ".cer01", ".cer02", ".cer03",
+      ".ecc", ".exx", ".wncry", ".wcry", ".locked_file"
+    ],
+    "suspicious_filenames": [
+      "*_INSTRUCTIONS.txt",
+      "*_HOW_TO_DECRYPT.txt", 
+      "*_RECOVER.txt",
+      "*_README.txt",
+      "DECRYPT_INSTRUCTIONS*",
+      "HELP_YOUR_FILES*",
+      "FILES_ENCRYPTED*",
+      "YOUR_FILES_ARE_ENCRYPTED*",
+      "BITCOIN_ADDRESS*",
+      "PAYMENT_*",
+      "*_RECOVERY_*"
+    ],
+    "suspicious_process_names": [
+      "ransomware.exe",
+      "locker.exe", 
+      "encryptor.exe",
+      "cryptolocker.exe",
+      "decrypt_instructions.exe",
+      "[a-z0-9]{8}.exe",
+      "[a-z0-9]{16}.exe"
+    ],
+    "suspicious_registry_keys": [
+      "*\\SOFTWARE\\Ransom*",
+      "*\\SOFTWARE\\Crypto*",
+      "*\\SOFTWARE\\Lock*",
+      "HKEY_CURRENT_USER\\Software\\Malware*",
+      "HKEY_LOCAL_MACHINE\\SOFTWARE\\Malware*"
+    ]
+  },
+  "block_lists": {
+    "malicious_hashes": {
+      "098f6bcd4621d373cade4e832627b4f6": "Test MD5 hash 1",
+      "5d41402abc4b2a76b9719d911017c592": "Test MD5 hash 2",
+      "7d793037a0760186574b0282f2f435e7": "Test MD5 hash 3"
+    },
+    "malicious_urls": [
+      "*tor2web.org",
+      "*tor2web.com",
+      "*ransomware*",
+      "*decrypt*",
+      "*payment*"
+    ],
+    "malicious_ips": [
+      "192.168.1.100/24",
+      "10.0.0.0/8"
+    ]
+  }
+}

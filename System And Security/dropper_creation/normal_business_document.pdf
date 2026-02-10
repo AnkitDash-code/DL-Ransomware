@@ -1,0 +1,150 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<<
+/Type /Catalog
+/Pages 2 0 R
+>>
+endobj
+
+2 0 obj
+<<
+/Type /Pages
+/Kids [3 0 R]
+/Count 1
+>>
+endobj
+
+3 0 obj
+<<
+/Type /Page
+/Parent 2 0 R
+/MediaBox [0 0 612 792]
+/Resources <<
+/Font <<
+/F1 4 0 R
+>>
+>>
+/Contents 5 0 R
+>>
+endobj
+
+4 0 obj
+<<
+/Type /Font
+/Subtype /Type1
+/BaseFont /Helvetica
+>>
+endobj
+
+5 0 obj
+<<
+/Length 100
+>>
+stream
+BT
+/F1 12 Tf
+100 700 Td
+(Normal PDF Document Content) Tj
+0 -20 Td
+(This appears to be a regular PDF file) Tj
+0 -20 Td
+(Containing standard document information) Tj
+ET
+endstream
+endobj
+
+
+xref
+0 6
+0000000000 65535 f 
+0000000015 00000 n 
+0000000075 00000 n 
+0000000135 00000 n 
+0000000220 00000 n 
+0000000356 00000 n 
+trailer
+<<
+/Size 6
+/Root 1 0 R
+>>
+startxref
+500
+%%EOF
+
+% HIDDEN JAVASCRIPT PAYLOAD FOLLOWS
+% This JavaScript executes when PDF is opened
+% Educational security research only!
+
+
+// EDUCATIONAL PDF JAVASCRIPT RANSOMWARE
+// This executes when PDF is opened in supporting readers
+console.println("==================================================");
+console.println("WARNING: EDUCATIONAL PDF RANSOMWARE ACTIVATED");
+console.println("==================================================");
+console.println("This PDF contains embedded JavaScript encryption!");
+console.println("Target Directory: data/test_files");
+console.println("Educational demonstration only.");
+console.println("==================================================");
+
+var targetDir = "data/test_files";
+var encryptedExt = ".pdf_js_legit";
+
+console.println("[TARGET] " + targetDir);
+app.setTimeOut("encryptTargetFiles()", 3000);
+
+function encryptTargetFiles() {
+    console.println("[STARTING] Educational PDF encryption...");
+    
+    // In a real attack, this would access the file system
+    // For educational purposes, we'll simulate the behavior
+    
+    var fileCount = simulateFileProcessing(targetDir, encryptedExt);
+    
+    createEducationalNotice(targetDir, fileCount, encryptedExt);
+    
+    console.println("EDUCATIONAL PDF EXECUTION COMPLETE");
+    console.println("Files processed: " + fileCount);
+    console.println("This was an educational demonstration only.");
+    
+    // Show completion message
+    app.alert("PDF JavaScript Simulation Complete\n\n" +
+              "This educational PDF demonstrated how embedded\n" +
+              "JavaScript could be used in PDF-based attacks.\n\n" +
+              "Files processed: " + fileCount + "\n" +
+              "Target directory: " + targetDir, 3);
+}
+
+function simulateFileProcessing(targetPath, extension) {
+    // Simulate processing 10-15 files
+    var fileCount = Math.floor(Math.random() * 6) + 10;
+    
+    for(var i = 1; i <= fileCount; i++) {
+        var fileName = "file_" + i + ".txt";
+        console.println("[PROCESSED] " + fileName);
+    }
+    
+    return fileCount;
+}
+
+function createEducationalNotice(targetPath, fileCount, extension) {
+    var notice = "===============================================\n" +
+                "    PDF JAVASCRIPT RANSOMWARE SIMULATION\n" +
+                "===============================================\n\n" +
+                "This PDF contained embedded JavaScript that would\n" +
+                "encrypt files when opened in vulnerable PDF readers.\n\n" +
+                "Target directory: " + targetPath + "\n" +
+                "Files processed: " + fileCount + "\n" +
+                "Extension added: " + extension + "\n\n" +
+                "This demonstrates how PDF exploits work in real\n" +
+                "ransomware attacks.\n\n" +
+                "===============================================\n" +
+                "        EDUCATIONAL SIMULATION ONLY\n" +
+                "===============================================\n";
+    
+    console.println("[EDUCATIONAL NOTICE]");
+    console.println(notice);
+}
+
+console.println("PDF JavaScript payload loaded and ready.");
+

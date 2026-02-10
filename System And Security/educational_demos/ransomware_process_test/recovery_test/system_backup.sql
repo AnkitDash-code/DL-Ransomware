@@ -1,0 +1,7 @@
+
+DATABASE BACKUP - SYSTEM CONFIGURATION
+
+CREATE TABLE users (id INT, username VARCHAR(50));
+INSERT INTO users VALUES (1, 'admin');
+INSERT INTO users VALUES (2, 'john_doe');
+GRANT ALL PRIVILEGES ON database.* TO 'admin';

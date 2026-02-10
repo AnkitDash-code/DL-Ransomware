@@ -1,0 +1,16 @@
+Topic,Description,Status,Priority
+Encryption Algorithms,Study AES, Fernet, RSA methods,In Progress,High
+Detection Methods,Analyze signature vs behavioral detection,Planned,Medium
+Machine Learning,Develop threat classification models,Research,High
+Ethical Framework,Create responsible disclosure guidelines,Completed,Low
+
+
+===============================================
+EDUCATIONAL SIMULATION NOTE
+===============================================
+This file represents what would happen in a real ransomware attack:
+- Original file would be encrypted with strong cryptography
+- Content would be completely unreadable without decryption key
+- Recovery would require the attacker's key or backups
+- This simulation shows the concept safely for educational purposes
+===============================================

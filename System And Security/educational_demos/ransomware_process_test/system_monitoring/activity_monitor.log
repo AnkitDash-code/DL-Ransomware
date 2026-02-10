@@ -1,0 +1,25 @@
+SYSTEM MONITORING LOG - EDUCATIONAL SIMULATION
+Timestamp: 2026-02-10 04:23:16
+
+MONITORED ACTIVITIES:
+[INFO] File access detected: test_files/confidential_report.txt
+[INFO] High entropy write operation: 7.8 bits/byte
+[INFO] Unusual file extension change detected
+[WARNING] Multiple rapid file modifications in test_files/
+[INFO] Process behavior flagged for analysis
+[INFO] Encryption pattern detected - initiating protection
+
+BEHAVIORAL ANALYSIS:
+- Suspicious activity score: 85/100
+- File operation frequency: HIGH
+- Extension modification attempts: 8
+- Process spawning unusual children: 3
+- Network communication attempts: 0
+
+ACTION TAKEN:
+- Process terminated
+- Files quarantined
+- System alert generated
+- Recovery process initiated
+
+This is educational monitoring data for demonstration purposes.

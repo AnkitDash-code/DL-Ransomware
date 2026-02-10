@@ -1,0 +1,5 @@
+Topic,Description,Status,Priority
+Encryption Algorithms,Study AES, Fernet, RSA methods,In Progress,High
+Detection Methods,Analyze signature vs behavioral detection,Planned,Medium
+Machine Learning,Develop threat classification models,Research,High
+Ethical Framework,Create responsible disclosure guidelines,Completed,Low

@@ -1,0 +1,14 @@
+==============================================
+EDUCATIONAL RANSOMWARE ENCRYPTION
+==============================================
+
+This file demonstrates proper file encryption
+that makes files truly inaccessible without
+the decryption key.
+
+Files in this directory:
+- project_notes.txt.encrypted (truly encrypted)
+- key.key (decryption key)
+
+This simulates how real ransomware works!
+==============================================
