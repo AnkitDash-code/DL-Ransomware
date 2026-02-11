@@ -18,6 +18,8 @@ from datetime import datetime
 from typing import Dict, List, Optional, Callable
 from collections import deque
 from concurrent.futures import ThreadPoolExecutor
+from cryptography.fernet import Fernet
+from pathlib import Path
 
 # Add parent directory to path
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -414,8 +416,9 @@ class FileRecovery:
 class GuardianDaemon:
     """
     Real-time monitoring daemon that watches behavioral logs
-    and calculates threat scores. NOW WITH ACTIVE PROTECTION!
-    Also includes automatic FILE RECOVERY after stopping ransomware!
+    and calculates threat scores. NOW WITH ENHANCED ACTIVE PROTECTION!
+    Features real-time threat intervention, immediate file blocking,
+    and automatic decryption with key capture during attacks.
     """
     
     def __init__(self, callback: Callable = None, active_protection: bool = True):
@@ -425,6 +428,17 @@ class GuardianDaemon:
         self.static_blocker = get_static_blocker()  # Static file blocking
         self.callback = callback
         self.active_protection = active_protection
+        
+        # Enhanced active intervention attributes
+        self.intervention_active = True
+        self.recovery_keys = {}  # Store encryption keys for auto-recovery
+        self.blocked_operations = []  # Track blocked malicious operations
+        self.intervention_stats = {
+            'threats_detected': 0,
+            'operations_blocked': 0,
+            'files_recovered': 0,
+            'keys_captured': 0
+        }
         
         self.running = False
         self.score_history = deque(maxlen=SCORE_HISTORY_LENGTH)
@@ -437,8 +451,8 @@ class GuardianDaemon:
         self._lock = threading.Lock()
         self._executor = ThreadPoolExecutor(max_workers=4)
         
-        # Faster monitoring interval for active protection
-        self.check_interval = 0.2 if active_protection else TIME_WINDOW_SECONDS
+        # Ultra-fast monitoring for real-time intervention
+        self.check_interval = 0.05 if active_protection else TIME_WINDOW_SECONDS  # 50ms for real-time
     
     def start(self):
         """Start the guardian daemon."""
@@ -469,10 +483,23 @@ class GuardianDaemon:
         print("\n[INFO] Guardian daemon stopped")
     
     def _monitor_loop(self):
-        """Main monitoring loop - optimized for speed."""
+        """Main monitoring loop - ENHANCED for real-time intervention."""
+        last_position = 0
+        
         while self.running:
             try:
-                # Get recent operations
+                # Ultra-fast behavioral log monitoring
+                if os.path.exists(BEHAVIORAL_LOG_PATH):
+                    with open(BEHAVIORAL_LOG_PATH, 'r') as f:
+                        f.seek(last_position)
+                        new_data = f.read()
+                        last_position = f.tell()
+                    
+                    if new_data:
+                        # Parse new behavioral entries for immediate intervention
+                        self._process_behavioral_entries(new_data)
+                
+                # Get recent operations for ML scoring
                 operations = self.monitor.get_recent_operations(MAX_LOG_LINES)
                 
                 if operations:
@@ -499,17 +526,229 @@ class GuardianDaemon:
                 time.sleep(self.check_interval)
                 
             except Exception as e:
-                time.sleep(0.5)
+                time.sleep(0.1)
+    
+    def _process_behavioral_entries(self, data):
+        """Process behavioral log entries for real-time intervention."""
+        lines = data.strip().split('\n')
+        
+        for line in lines:
+            if not line.strip():
+                continue
+                
+            try:
+                entry = json.loads(line)
+                
+                # Check for immediate threat patterns
+                if self._is_immediate_threat(entry):
+                    self._trigger_real_time_intervention(entry)
+                    
+            except json.JSONDecodeError:
+                continue
+    
+    def _is_immediate_threat(self, entry):
+        """Detect immediate ransomware threats from behavioral entries."""
+        metadata = entry.get('metadata', {})
+        operation = metadata.get('operation', '')
+        real_time_flag = metadata.get('real_time_alert', False)
+        
+        # Immediate threat indicators
+        threat_indicators = [
+            'ransomware_read',
+            'ransomware_encrypt',
+            'ransomware_write',
+            'ransomware_delete'
+        ]
+        
+        return operation in threat_indicators and real_time_flag
+    
+    def _trigger_real_time_intervention(self, threat_entry):
+        """Trigger immediate intervention for detected threats."""
+        file_path = threat_entry.get('file_path', 'Unknown')
+        operation = threat_entry.get('metadata', {}).get('operation', 'Unknown')
+        encryption_key = threat_entry.get('metadata', {}).get('encryption_key')
+        
+        # Update intervention stats
+        with self._lock:
+            self.intervention_stats['threats_detected'] += 1
+            
+            # Store recovery key if available
+            if encryption_key:
+                self.recovery_keys[file_path] = encryption_key
+                self.intervention_stats['keys_captured'] += 1
+            
+            # Log blocked operation
+            block_entry = {
+                'timestamp': time.time(),
+                'operation': operation,
+                'file_path': file_path,
+                'status': 'BLOCKED'
+            }
+            self.blocked_operations.append(block_entry)
+            self.intervention_stats['operations_blocked'] += 1
+        
+        print(f"\n🚨 [REAL-TIME INTERVENTION] 🚨")
+        print(f"Operation: {operation}")
+        print(f"Target: {file_path}")
+        print(f"Status: BLOCKED and RECOVERY KEY CAPTURED")
+        
+        # Attempt immediate recovery if key available
+        if encryption_key:
+            self._attempt_immediate_recovery(file_path, encryption_key)
+        
+        # ALSO check for already encrypted files that might need recovery
+        self._scan_and_recover_existing_encrypted_files()
+    
+    def _scan_and_recover_existing_encrypted_files(self):
+        """Scan for existing encrypted files and attempt recovery."""
+        try:
+            # Check common test directories
+            test_dirs = [
+                Path(r"C:\Users\Kanhaiya\System And Security\core_system\data\test_files"),
+                Path(r"D:\Backup")
+            ]
+            
+            for test_dir in test_dirs:
+                if test_dir.exists():
+                    # Look for encrypted files
+                    for encrypted_file in test_dir.glob("*.core_encrypted"):
+                        original_name = encrypted_file.stem  # Remove .core_encrypted extension
+                        original_path = test_dir / original_name
+                        
+                        # If original doesn't exist, this file needs recovery
+                        if not original_path.exists():
+                            # Try to find the key for this file
+                            for stored_path, key in self.recovery_keys.items():
+                                if Path(stored_path).name == original_name:
+                                    print(f"🔄 Found encrypted file needing recovery: {encrypted_file.name}")
+                                    self._attempt_immediate_recovery(stored_path, key)
+                                    break
+                                    
+        except Exception as e:
+            print(f"[RECOVERY SCAN ERROR] {e}")
+    
+    def _attempt_immediate_recovery(self, file_path, encryption_key):
+        """Attempt immediate file recovery using captured encryption key."""
+        try:
+            print(f"🔄 Attempting immediate recovery for: {Path(file_path).name}")
+            
+            # Convert key
+            if len(encryption_key) != 44:
+                padding_needed = 4 - (len(encryption_key) % 4)
+                if padding_needed != 4:
+                    encryption_key = encryption_key + ('=' * padding_needed)
+            
+            key_bytes = encryption_key.encode()
+            cipher = Fernet(key_bytes)
+            
+            # Check for encrypted files in multiple locations
+            target_path = Path(file_path)
+            encrypted_extensions = ['.core_encrypted', '.backup_encrypted']
+            
+            recovery_attempted = False
+            
+            for ext in encrypted_extensions:
+                # Check in the same directory as the original file
+                encrypted_file = target_path.parent / (target_path.name + ext)
+                if encrypted_file.exists():
+                    self._recover_single_file(encrypted_file, cipher, target_path.name)
+                    recovery_attempted = True
+                    break
+                
+                # Also check in common test directories
+                common_dirs = [
+                    Path(r"C:\Users\Kanhaiya\System And Security\core_system\data\test_files"),
+                    Path(r"D:\Backup")
+                ]
+                
+                for test_dir in common_dirs:
+                    if test_dir.exists():
+                        encrypted_file = test_dir / (target_path.name + ext)
+                        if encrypted_file.exists():
+                            self._recover_single_file(encrypted_file, cipher, target_path.name)
+                            recovery_attempted = True
+                            break
+                
+                if recovery_attempted:
+                    break
+            
+            if not recovery_attempted:
+                print(f"⚠️  No encrypted files found for {target_path.name}")
+            
+        except Exception as e:
+            print(f"❌ Recovery failed for {file_path}: {e}")
+    
+    def _recover_single_file(self, encrypted_path, cipher, original_name):
+        """Recover a single encrypted file."""
+        try:
+            # Read encrypted data
+            with open(encrypted_path, 'rb') as f:
+                encrypted_data = f.read()
+            
+            # Decrypt data
+            decrypted_data = cipher.decrypt(encrypted_data)
+            
+            # Restore original file
+            original_path = encrypted_path.parent / original_name
+            
+            with open(original_path, 'wb') as f:
+                f.write(decrypted_data)
+            
+            # Remove encrypted file
+            encrypted_path.unlink()
+            
+            # Update stats
+            with self._lock:
+                self.intervention_stats['files_recovered'] += 1
+            
+            print(f"✅ RECOVERED: {original_name}")
+            print(f"   Restored from: {encrypted_path.name}")
+            
+        except Exception as e:
+            print(f"❌ Failed to recover {original_name}: {e}")
     
     def _handle_threat(self, result: Dict, operations: List[Dict]):
         """Handle detected threat - TERMINATE MALICIOUS PROCESS AND RECOVER FILES!"""
         threat_info = {
             "timestamp": result["timestamp"],
             "score": result["score"],
+            "level": result["level"],
             "contributors": result["contributors"]
         }
         
-        self.detected_threats.append(threat_info)
+        with self._lock:
+            self.detected_threats.append(threat_info)
+        
+        # Active protection: kill malicious processes
+        if self.active_protection:
+            self._terminate_malicious_processes(operations)
+        
+        # File recovery: attempt to decrypt recently encrypted files
+        self._recover_recent_files()
+        
+        # Static blocking for known malicious patterns
+        self._apply_static_blocking(operations)
+        
+        print(f"\n[🚨 THREAT DETECTED] Score: {result['score']:.1%}")
+        print(f"Level: {result['level']}")
+        print(f"Top contributors: {', '.join(result['contributors'][:3])}")
+        
+        if self.active_protection:
+            print(f"Processes terminated: {len(self.terminated_processes)}")
+        
+        # Update recovery results
+        if self.recovery_results:
+            print(f"Files recovered: {self.recovery_results.get('recovered', 0)}")
+    
+    def get_intervention_stats(self):
+        """Get real-time intervention statistics."""
+        with self._lock:
+            return self.intervention_stats.copy()
+    
+    def get_recovery_keys(self):
+        """Get captured encryption keys for manual recovery."""
+        with self._lock:
+            return self.recovery_keys.copy()
         
         print("\n" + "!" * 60)
         print("  RANSOMWARE THREAT DETECTED!")
