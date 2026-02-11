@@ -1,0 +1,17 @@
+================================
+BACKUP FOLDER ENCRYPTION NOTICE
+================================
+
+Your backup files have been encrypted by educational ransomware.
+
+Target Directory: C:\Users\Kanhaiya\System And Security\core_system\test_flexible
+Files Encrypted: 2
+Extension Added: .backup_locked
+
+This is an educational simulation designed to demonstrate:
+- How ransomware targets directories
+- The importance of backups
+- Why encryption security matters
+
+Educational Purpose Only
+================================
